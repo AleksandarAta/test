@@ -61,7 +61,7 @@ class DriverLicenseController extends Controller
      */
     public function edit(DriverLicense $driverLicense)
     {
-        //
+        
     }
 
     /**
@@ -69,7 +69,19 @@ class DriverLicenseController extends Controller
      */
     public function update(Request $request, DriverLicense $driverLicense)
     {
-        //
+        // validated - $request validate ([
+        // 'name' => required|string|min:8 ])
+        // 'email' => [ 'required'
+        // 'email
+        // Rule::unique('users')->ignore($user->id)
+        // 'password'=> 'required|min:8'],
+        
+        
+        // if($user->password != $request->password) {
+        // $user->password = Hash:make($request->password)
+        //} 
+
+        // Ako user passowrd ne e ednakov na request password , 
     }
 
     /**
