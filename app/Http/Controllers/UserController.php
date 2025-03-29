@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Notifications\UserDeletedNotification;
 
 class UserController extends Controller
 {
@@ -71,6 +72,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->notify(new UserDeletedNotification($user));
+
+        $user->delete();
+
+        return redirect()->back()->with('message', 'User deleted successfully');
     }
 }

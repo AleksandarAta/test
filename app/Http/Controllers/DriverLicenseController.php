@@ -6,6 +6,7 @@ use App\Models\DriverLicense;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\DriverLicenseRequest;
+use App\Notifications\DriverLicenseDeletedNotification;
 use Carbon\Carbon;
 
 class DriverLicenseController extends Controller
@@ -88,7 +89,20 @@ class DriverLicenseController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(DriverLicense $driverLicense)
-    {
-        //
+    {   
+    //    $driver = DriverLicense::with('user')->FindOrFail($driverLicense->user_id);
+
+    //   $driversId = $driver->user->id;
+
+    //   $user = User::findOrFail($driversId);
+
+        // dd($user);
+        if($driverLicense->user != null){
+        $driverLicense->user->notify(new DriverLicenseDeletedNotification);
+        }
+            $driverLicense->delete();
+
+            return redirect()->back()->with('message', 'Driver license deleted successfully');
+
     }
 }
