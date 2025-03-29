@@ -4,8 +4,12 @@
             {{ __('Vehicles') }}
         </h2>
     </x-slot>
-  
-        <form action="{{ route('vehicles.create') }}" method="GET">
-    <x-button type='submit'>Create new vehicle</x-button>
-    </form>
+   <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
+                 <livewire:vehicles.index/>
+            </div>
+        </div>
+    </div>
+    
 </x-app-layout>
