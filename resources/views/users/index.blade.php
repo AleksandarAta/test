@@ -18,7 +18,7 @@
         </div>
         <div class = "p-3 mt-2">
             @foreach ($users as $user)
-                {{ $user->name }}
+                 {{ $user->name }} | <a href="{{ route('users.show', ['user' => $user]) }}" class="text-white inline-block py-2 px-3 w-fill bg-blue-500 rounded">View user</a>
                 <br>
             @endforeach
         </div>

@@ -18,6 +18,6 @@ Route::middleware([
     })->name('dashboard');
     Route::resource('users', UserController::class)->only('index', 'show', 'create', 'store', 'edit', 'update' , 'delete');
     //olny('index', 'show', 'create', 'store', 'edit', 'update' , 'delete')
-    Route::resource('driver_licenses', DriverLicenseController::class)->only('index' , 'store' , 'create');
+    Route::resource('driver_licenses', DriverLicenseController::class)->only('index' , 'store' , 'create', 'show');
 });
 

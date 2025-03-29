@@ -5,10 +5,15 @@
             </div>
             <div class = "p-3 mt-2">
                 @foreach ($driver_licenses as $driver_license)
+                @if($driver_license->user != null)
                     {{ $driver_license->user->name }} |
+                @else 
+                <span>No pearson assinged</span>
+                @endif
                     {{ $driver_license->date}} |
-
-                    {{ $driver_license->date_till }}
+                    {{ $driver_license->date_till }} |
+                <a href="{{ route  ('driver_licenses.show', ['driver_license' => $driver_license]),  }}" class="inline-block py-2 px-3 w-fill bg-blue-500 rounded">Create Driver License</a>
+                    
 
                     <br>
                 @endforeach

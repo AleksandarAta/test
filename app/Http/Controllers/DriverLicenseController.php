@@ -53,7 +53,7 @@ class DriverLicenseController extends Controller
      */
     public function show(DriverLicense $driverLicense)
     {
-        //
+        return view('driver_licenses.show', ['driverLicense' => $driverLicense]);
     }
 
     /**
