@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -23,15 +24,22 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+    $validatedData = $request->validated();
+
+     $newUser = User::create($validatedData);  
+
+    // session()->flash('flash.banner', 'Yay User created');
+    // session()->flash('flash.bannerStyle', 'success');
+
+     return redirect()->route('users.index')->with('message', 'User successfully created');
     }
 
     /**

@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\DriverLicense;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,9 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(100)->unverified()->create();
+        User::factory(100)->unverified()->has(DriverLicense::factory(1))->create();
 
-        User::factory()->create([
+        User::factory()->has(DriverLicense::factory(1))->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
