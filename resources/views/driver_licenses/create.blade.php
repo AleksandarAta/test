@@ -6,18 +6,14 @@
        <label for="date">Date</label>
        <x-input-error for="date"/>
        <x-input name="date" id="date" type="date"/> 
-       <label for="date_till">Expiry date</label>
-       <x-input-error for="email"/>
-       <x-input name="date_till" id="date_till" type="date"/>
-       <label for="password">Pearson</label>
-       <select>
+       <label for="selected_user">Pearson</label>
+       <select name="selected_user" id="selected_user">
         @foreach ($users as $user)
             <option value="{{ $user->id }}">{{$user->name}}</option>
-           
         @endforeach
        </select>
-       <x-input-error for="password"/>
-       <button type="submit" class="bg-blue-500 rounded ">Submit</button>
+       <x-input-error for="selected_user"/>
+       <x-button type="submit" class="bg-blue-500 rounded ">Submit</x-button>
     </form>
 </div>
 </x-app-layout>

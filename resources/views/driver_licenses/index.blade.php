@@ -5,7 +5,9 @@
             </div>
             <div class = "p-3 mt-2">
                 @foreach ($driver_licenses as $driver_license)
-                    {{ $driver_license->user->name }}
+                    {{ $driver_license->user->name }} |
+                    {{ $driver_license->date}} |
+
                     {{ $driver_license->date_till }}
 
                     <br>

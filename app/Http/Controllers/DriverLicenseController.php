@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\DriverLicense;
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use App\Http\Requests\DriverLicenseRequest;
+use Carbon\Carbon;
 
 class DriverLicenseController extends Controller
 {
@@ -34,9 +35,17 @@ class DriverLicenseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(DriverLicenseRequest $request)
     {
-        
+        $validatedData = $request->validated();
+
+        DriverLicense::create([
+            'user_id' => $request->selected_user,
+            'date' => Carbon::createFromDate($request->date),
+            'date_till' => Carbon::createFromDate($request->date)->addYears(10),
+        ]);
+
+        return redirect()->route('driver_licenses.index')->with('message', 'Driver license created successfully');
     }
 
     /**

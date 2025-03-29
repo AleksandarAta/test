@@ -23,6 +23,7 @@ class DriverLicenseRequest extends FormRequest
     {
         return [
             'date' => 'date|required',
+            'selected_user' => 'required|integer'
             // 'dl_number" => "required|regex:"
         ];
     }
