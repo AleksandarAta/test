@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Vehicles;
 
+use App\Models\User;
 use App\Models\Vehicle;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -14,10 +15,10 @@ class Index extends Component
     public $per_page = [5, 10, 15];
     public $per_page_selected = 15;
     public $search = "";
-    public $order_by = 'id';
+    public $order_by = 'user';
     public $order_type = 'asc';
 
-    public function order_by($order_by)
+    public function orderBy($order_by)
     {
         if ($order_by == $this->order_by) {
             if ($this->order_type == 'asc') {
@@ -33,14 +34,36 @@ class Index extends Component
 
     public function render()
     {
-        Log::info('Render method called - Search:', ['search' => $this->search]);
-        $vehicles = Vehicle::where('brand', 'like', '%' . $this->search . '%')
+        // $vehicles = Vehicle::where('brand', 'like', '%' . $this->search . '%')
+        //     ->OrWhere('model', 'like', '%' . $this->search . '%')
+        //     ->OrWhere('vin', 'like', '%' . $this->search . '%')
+        //     ->OrWhere('registration', 'like', '%' . $this->search . '%')
+        //     ->OrWhere('fuel', 'like', '%' . $this->search . '%')
+        //     ->OrWhereHas('user', function ($query) {
+        //         $query->where('name', 'like', '%' . $this->search . '%');
+        //     })
+        //     ->orderBy($this->order_by, $this->order_type)
+        //     ->paginate($this->per_page_selected);
+
+        $query = Vehicle::query();
+
+        $query->where('brand', 'like', '%' . $this->search . '%')
             ->OrWhere('model', 'like', '%' . $this->search . '%')
             ->OrWhere('vin', 'like', '%' . $this->search . '%')
             ->OrWhere('registration', 'like', '%' . $this->search . '%')
             ->OrWhere('fuel', 'like', '%' . $this->search . '%')
-            ->orderBy($this->order_by, $this->order_type)
-            ->paginate($this->per_page_selected);
+            ->OrWhereHas('user', function ($query) {
+                $query->where('name', 'like', '%' . $this->search . '%');
+            });
+
+        if ($this->order_by == 'user') {
+            $query->orderBy(User::select('name')->whereColumn('users.id', 'vehicles.user_id'), $this->order_type);
+        } else {
+            $query->orderBy($this->order_by, $this->order_type);
+        }
+
+        dd($query->toSql());
+        $vehicles = $query->paginate($this->per_page_selected);
 
         return view('livewire.vehicles.index', ['vehicles' => $vehicles]);
     }

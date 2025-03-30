@@ -4,7 +4,5 @@
             {{ __('Create vehicles') }}
         </h2>
     </x-slot>
-  <form action="{{ route('vehicles.create') }}" method="GET">
-    <x-button type='submit'>Show vehicle</x-button>
-    </form>
+        <livewire:vehicles.create>
 </x-app-layout>

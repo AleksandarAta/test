@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             ->has(Vehicle::Factory(1))
             ->create();
         User::factory(10)->create();
+        Vehicle::factory(10)->create();
+
         DriverLicense::factory(10)->create();
         User::factory()->has(DriverLicense::factory(1))->create([
             'name' => 'Test User',

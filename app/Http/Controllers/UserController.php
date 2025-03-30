@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
+        $users = User::with('vehicles')->paginate(10);
 
 
         return view('users.index', ['users' => $users]);
@@ -33,14 +33,14 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-    $validatedData = $request->validated();
+        $validatedData = $request->validated();
 
-     $newUser = User::create($validatedData);  
+        $newUser = User::create($validatedData);
 
-    // session()->flash('flash.banner', 'Yay User created');
-    // session()->flash('flash.bannerStyle', 'success');
+        // session()->flash('flash.banner', 'Yay User created');
+        // session()->flash('flash.bannerStyle', 'success');
 
-     return redirect()->route('users.index')->with('message', 'User successfully created');
+        return redirect()->route('users.index')->with('message', 'User successfully created');
     }
 
     /**
