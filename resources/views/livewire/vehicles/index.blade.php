@@ -32,8 +32,8 @@
                 </th>
                 <th class="border border-blue-200 ">VIN</th>
                 <th class="border border-blue-200">Registration</th>
-                <th wire:click="orderBy('fuel')" class="border border-blue-200 cursor-pointer hover:bg-blue-100">Fuel
-                </th>
+                <th class="border border-blue-200">Fuel</th>
+                <th class="border border-blue-200">Actions</th>
             </tr>
         </thead>
         <tbody class="border border-blue-200">
@@ -52,6 +52,10 @@
                 <td class="border border-blue-200 text-center">{{ $vehicle->vin }}</td>
                 <td class="border border-blue-200 text-center">{{ $vehicle->registration }}</td>
                 <td class="border border-blue-200 text-center">{{ $vehicle->fuel }}</td>
+                <td class="border border-blue-200 text-center">
+                    <a href="{{ route('vehicles.edit' , $vehicle->id) }}"
+                        class="border-blue-500 p-0.5 bg-blue-500 rounded text-white border">Edit this Vehicle</a>
+                </td>
             </tr>
             @endforeach
         </tbody>

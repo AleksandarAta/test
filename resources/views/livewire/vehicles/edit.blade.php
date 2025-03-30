@@ -9,10 +9,15 @@
                         <label for="name">Select a user</label>
                         <br>
                         <x-input-error for="user" />
-                        <select wire:model='user' name="selected_user" id="selected_user">
+                        <select wire:model='owner' name="selected_user" id="selected_user">
+
                             <option value="">...</option>
                             @foreach ($users as $user )
+                            {{-- @if ($user->id == $owner)
+                            <option selected value="{{ $user->id }}">{{$user->name}}</option>
+                            @else --}}
                             <option value="{{ $user->id }}">{{$user->name}}</option>
+                            {{-- @endif --}}
                             @endforeach
                         </select>
                     </div>

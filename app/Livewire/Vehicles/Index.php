@@ -62,7 +62,7 @@ class Index extends Component
             $query->orderBy($this->order_by, $this->order_type);
         }
 
-        dd($query->toSql());
+        // dd($query->toSql());
         $vehicles = $query->paginate($this->per_page_selected);
 
         return view('livewire.vehicles.index', ['vehicles' => $vehicles]);
