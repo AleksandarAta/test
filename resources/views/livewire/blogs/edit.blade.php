@@ -1,5 +1,6 @@
 <div x-data="{ title_focused: $wire.entangle('title_focused').live }">
     <form wire:submit.prevent="submit">
+     
         <div class='w-full'>
             @if (session()->has('message'))
             <div class="text-green-500 font-bold text-lg">
@@ -11,7 +12,7 @@
             Uploading..
         </div>
         <div class="w-full px-4 py-2">
-            <x-label for="title">Title</x-label>
+            <x-label for="title">title</x-label>
             <x-input name="title" wire:model.live='title' id="title" type="text" @focus="title_focused = true"
                 @click.away="title_focused = false" />
             <x-input-error for=" title" />
@@ -38,25 +39,18 @@
                 <x-input-error for="use_global" />
             </div>
         </div>
-
-                <div class="w-full px-4 py-2">
-                    <x-label for="keywords">Keywords</x-label>
-                    <x-input name="keywords" wire:model='keywords' id="keywords" type="text" />
-                    <x-input-error for="keywords" />
-                </div>
-            
         <div class="w-full px-4 py-2">
             <x-label for="slug">slug</x-label>
             <x-input name="slug" wire:model.live.debounce.200ms='slug' id="slug" type="text" disabled />
             <x-input-error for="slug" />
         </div>
         <div class="w-full px-4 py-2">
-            <x-label for="description">Description</x-label>
-            <x-input name="description" wire:model='description' id="description" type="text" />
-            <x-input-error for="description" />
+            <x-label for="Description">Description</x-label>
+            <x-input name="Description" wire:model='Description' id="Description" type="text" />
+            <x-input-error for="Description" />
         </div>
         <div class="w-full px-4 py-2">
-            <x-label for="image">image</x-label>
+            <x-label for="image">Image</x-label>
             <x-input name="image" wire:model='image' id="image" type="file" />
             <x-input-error for="image" />
         </div>
@@ -65,12 +59,20 @@
             Image Preview:
             <img src="{{ $image->temporaryUrl() }}" alt="some img" class="mx-auto">
             @endif
+            @if ($old_image != null)
+            <div>
+                <label for="old_image">Old image</label>
+                <img src="{{ $old_image  }}" alt="old image" alt={{ $title }}>
+            </div>   
+            @endif
         </div>
         <div class="w-full px-4 py-2" wire:ignore>
             <x-label for="body">Body</x-label>
             <textarea name="body" id="body" cols="30" rows="10" wire:model='body'></textarea>
         </div>
-        <button type="Submit">Submit</button>
+        <div>
+        <button type="submit" class="p-4 bg-blue-500" >Submit</button>
+    </div>
     </form>
 </div>
 @push('scripts')

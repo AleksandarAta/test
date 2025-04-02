@@ -19,7 +19,7 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::resource('blogs', BlogController::class)->only('index', 'create');
+    Route::resource('blogs', BlogController::class)->only('index', 'create' , 'edit' );
 
     Route::post("/upload", [BlogController::class, 'upload'])->name('upload.image');
 });

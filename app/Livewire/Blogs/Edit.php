@@ -4,14 +4,17 @@ namespace App\Livewire\Blogs;
 
 use App\Models\Blog;
 use Livewire\Component;
+use Faker\Provider\Image;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
-class Create extends Component
+class Edit extends Component
 {
+    
     use WithFileUploads;
 
+    public $blog;
     public $title;
     public $slug;
     public $author;
@@ -22,7 +25,9 @@ class Create extends Component
     public $image;
     public $body;
     public $title_focused;
-    public $imageUrl;
+    public $old_image;
+
+
     public function rules()
     {
         return [
@@ -37,13 +42,21 @@ class Create extends Component
 
         ];
     }
-
-    public function mount()
-    {
-        $this->published = false;
-        $this->use_global = false;
+    public function mount(Blog $blog) {
+        $this->blog = $blog;
+        $this->title = $blog->title;
+        $this->slug = $blog->slug;
+        $this->author = $blog->author;
+        $this->published = $blog->published;
+        $this->keywords = $blog->keywords;
+        $this->description = $blog->description;
+        $this->title = $blog->title;
+        $this->old_image = $blog->image;
+        $this->body = $blog->body;
         $this->title_focused = false;
+
     }
+
     public function submit()
     {
 
@@ -53,24 +66,25 @@ class Create extends Component
         if ($this->image != null) {
             $image_extenstion = $this->image->extension();
             $imageUrl = $this->image->storeAs('images', $this->slug . '-image.' . $image_extenstion);
-            $imageUrl = url($imageUrl);
+            $image = url($imageUrl);
         } else {
             $imageUrl = null;
         }
+        $blog = $this->blog;
 
-        $blog = Blog::create([
-            'title' => $this->title,
-            'slug' => $this->slug,
-            'author' => Auth::user()->name,
-            'published' => $this->published,
-            'use_global' => $this->use_global,
-            'keywords' => $this->keywords,
-            'description' => $this->description,
-            'image' => $imageUrl,
-            'body' => $this->body
-        ]);
 
-        session()->flash('flashBanner', 'Blog created successfully');
+        $blog->title = $this->title ;
+        $blog->slug = $this->slug ;
+        $blog->published = $this->published;
+        $blog->keywords = $this->keywords;
+        $blog->description = $this->description;
+        $blog->body = $this->body;
+        $blog->image = $imageUrl;
+
+  
+        $blog->save();
+        
+        session()->flash('flashBanner', 'Blog updated successfully');
         session()->flash('flashBannerStyle', 'success');
 
         return redirect()->route('blogs.index');
@@ -81,8 +95,7 @@ class Create extends Component
             $this->slug = Str::slug($this->title, '-');
         }
 
-
-        
-        return view('livewire.blogs.create');
+        // dd($this->image);
+        return view('livewire.blogs.edit' , compact('blog'));
     }
 }
