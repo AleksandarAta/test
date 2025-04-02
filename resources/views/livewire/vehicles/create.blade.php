@@ -46,6 +46,21 @@
                         <x-input-error for="fuel" />
                         <x-input name="fuel" id="fuel" wire:model='fuel' type="text" />
                     </div>
+                    <div class="w-full md:w-1/2 px-4 py-2">
+                        <label class="block text-neutral-800 font-medium text-base mb-1" for="image">Image</label>
+                        <input type="file" id="image" wire:model="image" class="w-full border-px border-gray-300 border-solid bg-white py-2 px-3 rounded-md shadow-sm min-h-[42px] placeholder:text-gray-500 text-black font-normal text-base leading-tight focus:border-blue-500 !ring-transparent disabled:text-black disabled:bg-gray-50 disabled:border-gray-300">
+                        @error('image') <span class="text-red-600 text-sm block pt-0.5">{{ $message }}</span> @enderror
+                    </div>
+                    <div>
+          
+    
+                               
+                    <div class="w-full px-4 py-2">
+                        @if ($image)                
+                            Image Preview:
+                            <img src="{{ $image->temporaryUrl() }}" class="mx-auto">                
+                        @endif
+                    </div>
                     <button type="submit" class="bg-blue-500 rounded p-3">Submit</button>
                 </form>
             </div>

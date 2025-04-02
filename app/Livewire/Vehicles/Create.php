@@ -5,14 +5,19 @@ namespace App\Livewire\Vehicles;
 use App\Models\User;
 use App\Models\Vehicle;
 use Livewire\Component;
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class Create extends Component
 {
+   use WithFileUploads;
+   
     public $user;
     public $brand;
     public $model;
     public $vin;
     public $fuel;
+    public $image;
+    public $imageUrl;
     public $registration;
 
 
@@ -25,12 +30,20 @@ class Create extends Component
             'registration' => 'required|string',
             'vin' => 'required|string',
             'fuel' => 'required|string',
-
         ];
     }
 
     public function submit()
     {
+        if ($this->image != null) {
+            $image_extension = $this->image->getClientOriginalExtension();
+            $image_url = $this->image->storeAs('images', $this->model . '-image.' . $image_extension);
+            $image_url = url($image_url);
+        } else {
+            $image_url = null;
+        }
+
+
         $this->validate();
 
         $newVehicle =  Vehicle::create([
@@ -40,6 +53,7 @@ class Create extends Component
             'registration' => $this->registration,
             'vin' => $this->vin,
             'fuel' => $this->fuel,
+            'image' => $image_url,
         ]);
 
         session()->flash('flash.banner', 'vehicle create succsessfully');

@@ -53,6 +53,8 @@ class Edit extends Component
             $imageUrl = url($imageUrl);
         }
 
+        dd($this->vehicle->image);
+
 
         $this->validate();
 

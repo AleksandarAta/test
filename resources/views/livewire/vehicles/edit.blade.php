@@ -51,6 +51,14 @@
                         <x-input-error for="fuel" />
                         <x-input name="fuel" id="fuel" wire:model='fuel' type="text" />
                     </div>
+                </div>
+                @if ($old_image != null)
+                <div class="w-full px-4 py-2">
+                    <label class="block text-neutral-800 font-medium text-base mb-1" for="image">Old Image</label>
+                    <img id="old_image" src="{{ $old_image }}" alt="{{ $model }}" class="w-auto h-auto max-w-[70%] max-h-[400px]">
+                </div>
+                @endif
+
                     <button type="submit" class="bg-blue-500 rounded p-3">Submit</button>
                 </form>
             </div>
