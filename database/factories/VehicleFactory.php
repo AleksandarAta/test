@@ -20,6 +20,14 @@ class VehicleFactory extends Factory
      */
     public function definition(): array
     {
+        $has_image = rand(0, 1);
+
+        if ($has_image != 0) {
+            $image = $this->faker->imageUrl(640, 480, 'technology', true);
+        } else {
+            $image = null;
+        }
+
         $this->faker->addProvider(new FakeCar($this->faker));
         $vehicle = $this->faker->vehicleArray();
         return [
@@ -28,7 +36,7 @@ class VehicleFactory extends Factory
             'vin' => $this->faker->vin,
             'registration' => $this->faker->vehicleRegistration,
             'fuel' => $this->faker->vehicle,
-
+            'image' => $image,
         ];
     }
 }

@@ -15,6 +15,8 @@ class Edit extends Component
     public $fuel;
     public $registration;
     public $vehicle;
+    public $image;
+    public $old_image;
 
     protected function rules()
     {
@@ -25,6 +27,7 @@ class Edit extends Component
             'registration' => 'required|string',
             'vin' => 'required|string',
             'fuel' => 'required|string',
+            'image' => 'file',
 
         ];
     }
@@ -38,10 +41,19 @@ class Edit extends Component
         $this->vin = $vehicle->vin;
         $this->fuel = $vehicle->fuel;
         $this->vehicle = $vehicle;
+        $this->old_image = $vehicle->image;
     }
 
     public function submit()
     {
+
+        if ($this->image != null) {
+            $image_extension = $this->image->getClientOriginalExtension();
+            $imageUrl = $this->image->storeAs('images' . $this->model . "-image" . $image_extension);
+            $imageUrl = url($imageUrl);
+        }
+
+
         $this->validate();
 
         $this->vehicle->update([
@@ -51,6 +63,7 @@ class Edit extends Component
             'registration' => $this->registration,
             'vin' => $this->vin,
             'fuel' => $this->fuel,
+            'image' => $imageUrl,
         ]);
 
         session()->flash('flash.banner', 'Vehicle created succsessfully');

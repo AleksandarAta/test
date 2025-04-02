@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Blog;
 use App\Models\User;
 use App\Models\Vehicle;
 
@@ -20,7 +21,7 @@ class DatabaseSeeder extends Seeder
             ->has(Vehicle::Factory(1))
             ->create();
         User::factory(10)->create();
-        Vehicle::factory(10)->create();
+        Vehicle::factory(100)->create();
 
         DriverLicense::factory(10)->create();
         User::factory()->has(DriverLicense::factory(1))->create([
@@ -34,5 +35,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User 2',
             'email' => 'test2@example.com',
         ]);
+        Blog::factory(100)->create();
     }
 }

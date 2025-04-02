@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 Use App\Http\Controllers\UserController;
 Use App\Http\Controllers\DriverLicenseController;
@@ -27,6 +28,9 @@ Route::middleware([
     route::Get('/vehicles/create', [App\Http\Controllers\VehicleController::class, 'create'])->name('vehicles.create');
     route::Get('/vehicles/{vehicle_id}/edit/', [App\Http\Controllers\VehicleController::class, 'edit'])->name('vehicles.edit');
 
+    Route::resource('blogs', BlogController::class)->only('index', 'create', 'edit');
+
+    Route::post('/upload', [BlogController::class , 'upload'] );
 
 });
 

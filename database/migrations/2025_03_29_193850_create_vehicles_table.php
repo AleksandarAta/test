@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('vin');
             $table->string('registration');
             $table->string('fuel');
+            $table->string('image')->nullable();
             $table->foreignIdFor(User::class)->nullable();
             $table->timestamps();
           

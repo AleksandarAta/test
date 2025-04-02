@@ -8,7 +8,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Log;
 
-class Index extends Component
+class index extends Component
 {
     use WithPagination;
 
