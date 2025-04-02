@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-abstract class Controller
-{
-    //
-}
+use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\Log;
+
+
+abstract class Controller {}
