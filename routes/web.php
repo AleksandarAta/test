@@ -32,6 +32,10 @@ Route::middleware([
 
     Route::post('/upload', [BlogController::class , 'upload'] );
 
+    Route::get('/linkstorage', function () {
+        Artisan::call('storage:link');
+    });
+
 });
 
 Route::get('/email/verify', function () {
