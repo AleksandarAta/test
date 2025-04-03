@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\HttpController;
 use App\Models\Blog;
 
 Route::get('/', function () {
@@ -22,6 +23,9 @@ Route::middleware([
     Route::resource('blogs', BlogController::class)->only('index', 'create' , 'edit' );
 
     Route::post("/upload", [BlogController::class, 'upload'])->name('upload.image');
+
+    Route::get('api/{search}', [HttpController::class, 'getApi']);
+    Route::get('name/{search}', [HttpController::class , 'getName']);
 });
 
 
