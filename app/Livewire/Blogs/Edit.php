@@ -64,9 +64,9 @@ class Edit extends Component
 
 
         if ($this->image != null) {
-            $image_extenstion = $this->image->extension();
-            $imageUrl = $this->image->storeAs('images', $this->slug . '-image.' . $image_extenstion);
-            $image = url($imageUrl);
+            $image_extenstion = $this->image->getClientOriginalExtension();
+            $imageUrl = $this->image->storeAs('images', $this->slug . '-image.' . $image_extenstion , 'public');
+            $imageUrl = url($imageUrl);
         } else {
             $imageUrl = null;
         }
@@ -93,9 +93,9 @@ class Edit extends Component
     {
         if ($this->title != null && $this->title_focused == true) {
             $this->slug = Str::slug($this->title, '-');
-        }
+        }   
+        $blog = $this->blog;
 
-        // dd($this->image);
         return view('livewire.blogs.edit' , compact('blog'));
     }
 }

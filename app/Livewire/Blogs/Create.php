@@ -23,6 +23,12 @@ class Create extends Component
     public $body;
     public $title_focused;
     public $imageUrl;
+
+  
+
+
+
+
     public function rules()
     {
         return [
@@ -51,8 +57,8 @@ class Create extends Component
 
 
         if ($this->image != null) {
-            $image_extenstion = $this->image->extension();
-            $imageUrl = $this->image->storeAs('images', $this->slug . '-image.' . $image_extenstion);
+            $image_extenstion = $this->image->getClientOriginalExtension();
+            $imageUrl = $this->image->storeAs('images', $this->slug . '-image.' . $image_extenstion, 'public');
             $imageUrl = url($imageUrl);
         } else {
             $imageUrl = null;
