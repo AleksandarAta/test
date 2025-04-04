@@ -25,7 +25,9 @@ Route::middleware([
     Route::post("/upload", [BlogController::class, 'upload'])->name('upload.image');
 
     Route::get('api/{search}', [HttpController::class, 'getApi']);
-    Route::get('name/{search}', [HttpController::class , 'getName']);
+    Route::get('name/{search}/{type}', [HttpController::class , 'getName']);
+
+    Route::get('chart', [HttpController::class, 'chart']);
 });
 
 
