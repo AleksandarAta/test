@@ -3,23 +3,41 @@
 namespace App\Livewire;
 
 use App\Models\Pokemon;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Json;
 use Livewire\Component;
 
 class Chart extends Component
 {
     public function render()
     {
-        $pokemon = Pokemon::where('weight', 'created_at')->get();
 
-        $pokemon_weight = $pokemon->pluck('weight');
-        $pokemon_summoned = $pokemon->pluck('created_at');
+        $datasets= array();
 
-         
-        
+
+        $pokemon_weight = Pokemon::where('created_at', '>=', Carbon::now()->subDay())->pluck('weight');
+        $pokemon_height = Pokemon::where('created_at', '>=', Carbon::now()->subDay())->pluck('height');
+        $pokemon = Pokemon::whereIn('weight', $pokemon_weight)->pluck('name');
+        array_push($datasets, [
+            'label' => 'Pokemon Weight',
+            'fill' => false,
+            'data' => $pokemon_weight,
+            'borderColor' => 'rgb(250, 30, 40)',
+            'boderWidth' => 2,
+        ]); 
+        array_push($datasets, [
+            'label' => 'Pokemon height',
+            'fill' => false,
+            'data' => $pokemon_height,
+            'borderColor' => 'rgb(255, 30, 120)',
+            'boderWidth' => 2,
+        ]);
+        // dd($pokemon);
+
+        $graph = array('labels' => $pokemon, 'datasets' => $datasets);
 
         return view('livewire.chart', [
-            'pokemon_weight' => $pokemon_weight,
-            'pokemon_summoned' => $pokemon_summoned,
+            'graph' => json_encode($graph),
         ]);
     }
 }

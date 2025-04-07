@@ -1,27 +1,34 @@
-<div x-data x-init= "new Chart{
-    document.getElementbyId('#chart'){
-    type: 'scatter',
-  data: {
-    labels: ['weight', 'time'],
-    datasets: [{
-    
-    }],
-  },
-  options: {
-    scales: {
-      x: {
-        type: 'linear',
-        text: 'Weight'
-        display: true
-      }
-        y: {
-            display: true,
-        }
-    }
-  }
-};
-    }
-}">
-    <canvas id="chart"></canvas>
-
+<div x-data 
+     x-init="
+        chart = new Chart(
+            document.getElementById('chart'),
+            {
+                type: 'line',
+                data: {{ $graph }},
+                options: {
+                  plugins: {
+                    title: {
+                      text: 'Time',
+                      display: true,
+                    }
+                  },
+                  scales: {
+                    x: {
+                      type: 'time',
+                      time: {
+                        unit: 'day',
+                      }
+                    },
+                    y: {
+                         title: {
+                            display: true,
+                            text: 'Value',
+                         }
+                    }
+                  },
+                },
+            });
+     ">
+     {{-- {{ dd($graph) }} --}}
+  <canvas id="chart"></canvas>
 </div>
