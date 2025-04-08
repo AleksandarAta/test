@@ -3,7 +3,7 @@
         chart = new Chart(
             document.getElementById('chart'),
             {
-                type: 'scatter',
+                type: 'line',
                 data: {{ $graph }},
                 options: {
                   plugins: {
@@ -16,7 +16,7 @@
                    x: {
                         title: {
                             display: true,
-                            text: 'Pokémon',
+                            text: 'Pokemon',
                         },
                         type: 'category',  
                     },

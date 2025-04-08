@@ -1,40 +1,34 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Jobs;
 
 use App\Models\Pokemon;
 use Illuminate\Support\Arr;
-use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-
-class PopulatePokemon extends Command
+class ProccessPokemon implements ShouldQueue
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'app:populate-pokemon';
+    use Queueable;
 
     /**
-     * The console command description.
-     * @var string
+     * Create a new job instance.
      */
-    protected $description = 'puplite the pokemon migartion based on api';
+    public function __construct()
+    {
+        //
+    }
 
     /**
-     * Execute the console command.
+     * Execute the job.
      */
-    public function handle()
+    public function handle(): void
     {
         $pokemons = Http::get("https://softwium.com/api/pokemons")->object();
 
-        $difAttrubytes = array();
 
         $chunks = Arr::random($pokemons, 3);
-
-        $weights = Pokemon::select('weight');
 
 
         foreach ($chunks as $chunk) {
@@ -49,6 +43,6 @@ class PopulatePokemon extends Command
                 'familiy' => $chunk->family
             ]);
         }
-        $this->info('pupulated database');
     }
 }
+

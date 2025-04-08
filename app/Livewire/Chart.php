@@ -34,16 +34,18 @@ class Chart extends Component
 
         array_push($datasets, [
             'label' => 'Pokemon Weight',
-            'fill' => false,
+            'fill' => true,
             'data' => $weight,
             'borderColor' => 'rgb(250, 30, 40)',
+            'backgroundColor' => 'rgb(250, 30, 40, 0.1)',
             'borderWidth' => 2,
         ]); 
         array_push($datasets, [
             'label' => 'Pokemon height',
-            'fill' => false,
+            'fill' => true,
             'data' => $height,
             'borderColor' => 'rgb(144, 238, 144)',
+            'backgroundColor' => 'rgb(144, 238, 144 , 2)',
             'borderWidth' => 2,
         ]);
 
