@@ -30,9 +30,17 @@ class PopulatePokemon extends Command
     {
         $pokemons = Http::get("https://softwium.com/api/pokemons")->object();
 
+        $difAttrubytes = array();
+
         $chunks = Arr::random($pokemons, 3);
 
+        $weights = Pokemon::select('weight');
+
+
         foreach ($chunks as $chunk) {
+
+            return;
+
             Pokemon::create([
                 'name'=> $chunk->name,
                 'weight' => $chunk->weight,

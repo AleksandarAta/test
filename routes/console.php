@@ -9,4 +9,4 @@ use Illuminate\Support\Facades\Schedule;
 // })->purpose('Display an inspiring quote');
 
 
-Schedule::command('app:populate-pokemon')->everyFiveMinutes();
+Schedule::command('app:populate-pokemon')->everyFifteenSeconds();

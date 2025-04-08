@@ -3,32 +3,32 @@
         chart = new Chart(
             document.getElementById('chart'),
             {
-                type: 'line',
+                type: 'scatter',
                 data: {{ $graph }},
                 options: {
                   plugins: {
                     title: {
-                      text: 'Time',
+                      text: 'Pokemon Data',
                       display: true,
                     }
                   },
                   scales: {
-                    x: {
-                      type: 'time',
-                      time: {
-                        unit: 'day',
-                      }
+                   x: {
+                        title: {
+                            display: true,
+                            text: 'Pokémon',
+                        },
+                        type: 'category',  
                     },
                     y: {
                          title: {
                             display: true,
-                            text: 'Value',
+                            text: 'Height and weight',
                          }
                     }
                   },
                 },
             });
      ">
-     {{-- {{ dd($graph) }} --}}
   <canvas id="chart"></canvas>
 </div>
