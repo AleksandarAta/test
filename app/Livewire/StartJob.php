@@ -9,6 +9,8 @@ class StartJob extends Component
 {
     public function start_job() {
         ProccessPokemon::dispatch();
+
+        $this->dispatch('refresh-graph');
     }
 
 

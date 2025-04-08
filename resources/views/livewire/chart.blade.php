@@ -1,5 +1,8 @@
 <div x-data 
      x-init="
+  window.addEventListener('refresh-graph', () => {
+    chart.destroy();
+  })
         chart = new Chart(
             document.getElementById('chart'),
             {
@@ -29,6 +32,6 @@
                   },
                 },
             });
-     ">
+     " >
   <canvas id="chart"></canvas>
 </div>

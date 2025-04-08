@@ -6,15 +6,13 @@ use App\Models\Pokemon;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Livewire\Component;
+use Livewire\Attributes\On;
 
 class Chart extends Component
 {
 
-
-
     public function render()
     {
-
         $datasets= array();
 
         $arr = Pokemon::where('created_at', '>=', Carbon::now()->yesterday())->pluck('name')->toArray();
@@ -55,4 +53,8 @@ class Chart extends Component
             'graph' => json_encode($graph),
         ]);
     }
+
+        // #[On('refresh-graph')]
+        // public function refreshGraph () {
+        // }
 }
