@@ -10,3 +10,7 @@ use Illuminate\Support\Facades\Schedule;
 
 
 Schedule::command('app:populate-pokemon')->everyFifteenMinutes();
+Schedule::command('app:populate-peoples')->everyFifteenMinutes();
+Schedule::command('app:populate-books')->everyFifteenMinutes();
+
+

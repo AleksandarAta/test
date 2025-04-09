@@ -27,7 +27,7 @@ Route::middleware([
     Route::get('api/{search}', [HttpController::class, 'getApi']);
     Route::get('name/{search}/{type}', [HttpController::class , 'getName']);
 
-    Route::get('chart', [HttpController::class, 'chart']);
+    Route::get('chart', [HttpController::class, 'chart'])->name('chart.select');
 });
 
 

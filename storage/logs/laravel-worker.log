@@ -1,0 +1,36 @@
+supervisor: couldn't chdir to /home/vagrant/code/laravel: ENOENT
+supervisor: child process was not spawned
+supervisor: couldn't chdir to /home/vagrant/code/laravel: ENOENT
+supervisor: child process was not spawned
+supervisor: couldn't chdir to /home/vagrant/code/laravel: ENOENT
+supervisor: child process was not spawned
+supervisor: couldn't chdir to /home/vagrant/code/laravel: ENOENT
+supervisor: child process was not spawned
+supervisor: couldn't chdir to /home/vagrant/code/laravel: ENOENT
+supervisor: child process was not spawned
+supervisor: couldn't chdir to /home/vagrant/code/laravel: ENOENT
+supervisor: child process was not spawned
+supervisor: couldn't chdir to /home/vagrant/code/laravel: ENOENT
+supervisor: child process was not spawned
+supervisor: couldn't chdir to /home/vagrant/code/laravel: ENOENT
+supervisor: child process was not spawned
+supervisor: couldn't chdir to /home/vagrant/code/laravel: ENOENT
+supervisor: child process was not spawned
+supervisor: couldn't chdir to /home/vagrant/code/laravel: ENOENT
+supervisor: child process was not spawned
+supervisor: couldn't chdir to /home/vagrant/code/laravel: ENOENT
+supervisor: child process was not spawned
+supervisor: couldn't chdir to /home/vagrant/code/laravel: ENOENT
+supervisor: child process was not spawned
+  2025-04-09 12:03:00 App\Jobs\ProccessPokemon ....................... RUNNING
+  2025-04-09 12:03:01 App\Jobs\ProccessPokemon ....................... 1s DONE
+  2025-04-09 12:05:56 App\Jobs\ProccessPokemon ....................... RUNNING
+  2025-04-09 12:05:56 App\Jobs\ProccessPokemon ................. 497.04ms DONE
+  2025-04-09 12:07:42 App\Jobs\ProccessPokemon ....................... RUNNING
+  2025-04-09 12:07:42 App\Jobs\ProccessPokemon ................. 488.31ms DONE
+  2025-04-09 12:14:40 App\Jobs\ProccessPokemon ....................... RUNNING
+  2025-04-09 12:14:41 App\Jobs\ProccessPokemon ................. 447.62ms DONE
+  2025-04-09 12:14:44 App\Jobs\ProccessPokemon ....................... RUNNING
+  2025-04-09 12:14:44 App\Jobs\ProccessPokemon ................. 466.17ms DONE
+  2025-04-09 12:15:17 App\Jobs\ProccessPokemon ....................... RUNNING
+  2025-04-09 12:15:18 App\Jobs\ProccessPokemon ................. 376.38ms DONE
