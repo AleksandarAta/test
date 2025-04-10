@@ -33,3 +33,4 @@ Route::middleware([
 
 Route::get('blog/list', [BlogController::class, 'list'])->name('all.blogs');
 Route::get('blog/{slug}', [BlogController::class, 'list_blog'])->name('list.blog');
+ 

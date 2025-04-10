@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class BlogController extends Controller
 {
@@ -12,6 +13,9 @@ class BlogController extends Controller
      */
     public function index()
     {
+
+        abort_if(Gate::denies('edit_blogs'), 403);
+
         $blogs = Blog::all();
 
         return view('blogs.index', ['blogs' => $blogs]);
@@ -22,6 +26,8 @@ class BlogController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('edit_blogs'), 403);
+
         return view('blogs.create');
     }
 
@@ -43,6 +49,8 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
+        abort_if(Gate::denies('edit_blogs'), 403);
+
         return view('blogs.view', compact('blog'));
     }
 
@@ -64,6 +72,8 @@ class BlogController extends Controller
 
     public function upload(Request $request)
     {
+        abort_if(Gate::denies('edit_blogs'), 403);
+
         $image_path = request()->file('file')->store('images');
 
         return response()->json([

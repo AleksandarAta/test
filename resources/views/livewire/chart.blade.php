@@ -1,7 +1,7 @@
 <div >
   @if($loading)
-  <div>
-    <h2>CHOOSE A CHART TO DSIPLAY</h2>
+  <div  class="p-5 text-center">
+    <h2 class="text-transform: uppercase font-weight: 200">CHOOSE A CHART TO DSIPLAY</h2>
   </div>
   @else
   <div x-data 

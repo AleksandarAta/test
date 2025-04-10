@@ -30,7 +30,7 @@ class HttpController extends Controller
     }
 
     public function chart(){
-        $loading = true;
-        return view('chart' , compact('loading'));
+        // $loading = true;
+        return view('chart');
     }
 }

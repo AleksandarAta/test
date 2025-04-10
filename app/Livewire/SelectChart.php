@@ -9,12 +9,9 @@ class SelectChart extends Component
     public $value;
     public $loading;
 
-    public function mount($loading) {
-        $this->loading = $loading;
-    }
 
     public function submit() {
-        $this->dispatch('showChart', value:$this->value , loading:$this->loading);
+        $this->dispatch('showChart', value:$this->value);
         $this->dispatch('rerender');
     }
 
