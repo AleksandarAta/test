@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\HttpController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -42,6 +44,9 @@ Route::middleware([
         Artisan::call('storage:link');
     });
 
+    route::resource('cities', CityController::class)->only('index', 'edit', 'create');
+    route::resource('companies', CompanyController::class)->only('index', 'edit' , 'create');
+    
 });
 
 Route::get('/email/verify', function () {

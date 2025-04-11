@@ -46,6 +46,15 @@
                         {{ __('Chart') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('companies.index') }}" :active="request()->routeIs('companies.*')">
+                        {{ __('Companies') }}
+                    </x-nav-link>
+                </div><div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link href="{{ route('cities.index') }}" :active="request()->routeIs('cities.*')">
+                        {{ __('Cities') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">

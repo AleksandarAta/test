@@ -3,10 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\Blog;
+use App\Models\City;
 use App\Models\User;
-use App\Models\Vehicle;
+use App\Models\Company;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Vehicle;
 use App\Models\DriverLicense;
 use Illuminate\Database\Seeder;
 
@@ -41,6 +43,23 @@ class DatabaseSeeder extends Seeder
             RolesAndPermissionsSeeder::class,
             AdminSeeder::class,
         ]);
+        
+        City::factory(100)->create();
+        Company::factory(100)->create();
+
+        $cities = City::all();
+        $companies = Company::all();
+
+        City::all()->each(function($city) use ($companies){
+            $city->companies()->attach(
+               $companies->random(rand(1,4))->pluck('id')->toArray()
+            );
+        });
+        Company::all()->each(function($Company) use ($cities){
+            $Company->cities()->attach(
+               $cities->random(rand(1,4))->pluck('id')->toArray()
+            );
+        });
 
 
     }
