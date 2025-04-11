@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\BlogController;
-use Illuminate\Support\Facades\Route;
-Use App\Http\Controllers\UserController;
-Use App\Http\Controllers\DriverLicenseController;
 use Faker\Guesser\Name;
 use Illuminate\Http\Request;
+Use App\Http\Controllers\UserController;
+Use App\Http\Controllers\DriverLicenseController;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\BlogController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/', function () {

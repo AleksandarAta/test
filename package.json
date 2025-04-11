@@ -20,6 +20,7 @@
         "vite-plugin-static-copy": "^2.3.0"
     },
     "dependencies": {
-        "alpinejs": "^3.14.9"
+        "alpinejs": "^3.14.9",
+        "chartjs": "^0.3.24"
     }
 }
