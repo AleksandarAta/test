@@ -4,9 +4,12 @@ use Faker\Guesser\Name;
 use Illuminate\Http\Request;
 Use App\Http\Controllers\UserController;
 Use App\Http\Controllers\DriverLicenseController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\HttpController;
+use App\Http\Controllers\VehicleController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/', function () {
@@ -25,13 +28,15 @@ Route::middleware([
     //olny('index', 'show', 'create', 'store', 'edit', 'update' , 'delete')
     Route::resource('driver_licenses', DriverLicenseController::class)->only('index' , 'store' , 'create', 'show', 'destroy');
 
-    route::Get('/vehicles', [App\Http\Controllers\VehicleController::class, 'index'])->name('vehicles.index');
-    route::Get('/vehicles/create', [App\Http\Controllers\VehicleController::class, 'create'])->name('vehicles.create');
-    route::Get('/vehicles/{vehicle_id}/edit/', [App\Http\Controllers\VehicleController::class, 'edit'])->name('vehicles.edit');
+    route::Get('/vehicles', [VehicleController::class, 'index'])->name('vehicles.index');
+    route::Get('/vehicles/create', [VehicleController::class, 'create'])->name('vehicles.create');
+    route::Get('/vehicles/{vehicle_id}/edit/', [VehicleController::class, 'edit'])->name('vehicles.edit');
 
     Route::resource('blogs', BlogController::class)->only('index', 'create', 'edit');
 
     Route::post('/upload', [BlogController::class , 'upload'] );
+
+    route::get('chart', [HttpController::class, 'chart'])->name('chart.select');
 
     Route::get('/linkstorage', function () {
         Artisan::call('storage:link');
