@@ -36,5 +36,12 @@ class DatabaseSeeder extends Seeder
             'email' => 'test2@example.com',
         ]);
         Blog::factory(100)->create();
+
+        $this->call([
+            RolesAndPermissionsSeeder::class,
+            AdminSeeder::class,
+        ]);
+
+
     }
 }

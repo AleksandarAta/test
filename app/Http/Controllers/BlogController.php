@@ -15,7 +15,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        // abort_if(Gate::denies('edit_blogs'), 403);
+        abort_if(Gate::denies('edit_blogs'), 403);
         
         return view('blogs.index');
     }
@@ -25,7 +25,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        // abort_if(Gate::denies('edit_blogs'), 403);
+        abort_if(Gate::denies('edit_blogs'), 403);
 
         return view('blogs.create');
     }
@@ -51,7 +51,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        // abort_if(Gate::denies('edit_blogs'), 403);
+        abort_if(Gate::denies('edit_blogs'), 403);
         
         return view('blogs.edit', compact('blog'));
     }
