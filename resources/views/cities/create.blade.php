@@ -4,5 +4,6 @@
             {{ __('Create vehicles') }}
         </h2>
     </x-slot>
+        <livewire:cities.modal>
         <livewire:cities.create>
 </x-app-layout>

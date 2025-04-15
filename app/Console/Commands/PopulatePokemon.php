@@ -2,11 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Models\User;
 use App\Models\Pokemon;
+use App\Notifications\chartUpdated;
 use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
-
+use Illuminate\Support\Facades\Notification;
 
 class PopulatePokemon extends Command
 {
@@ -48,6 +50,10 @@ class PopulatePokemon extends Command
             ]);
         }
         $this->info('pupulated database');
+
+        $users = User::role('admin')->get();
+
+        Notification::send($users, new chartUpdated('populated_database'));
     }
 
 }

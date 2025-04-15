@@ -2,10 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Models\User;
 use App\Models\Peoples;
 use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
+use App\Notifications\chartUpdated;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Notification;
 
 class PopulatePeoples extends Command
 {
@@ -40,5 +43,9 @@ class PopulatePeoples extends Command
             'age' => $chunk->age,
         ]);
      }
+     $users = User::role('admin')->get();
+
+     Notification::send($users, new chartUpdated('populate_peoples'));
+
     }
 }
