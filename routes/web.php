@@ -45,6 +45,7 @@ Route::middleware([
     });
 
     route::resource('cities', CityController::class)->only('index', 'edit', 'create');
+    route::resource('driver_license', DriverLicenseController::class)->only('index', 'edit', 'create', 'show');
     route::resource('companies', CompanyController::class)->only('index', 'edit' , 'create');
     
 });

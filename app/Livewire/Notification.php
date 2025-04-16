@@ -14,16 +14,18 @@ class Notification extends Component
     public $user_id;
 
     public $id ;
+    
      public function mount()
     {
         $this->user_id = Auth::user()->id;
     }
+    
 
     
     #[On('echo-notification:App.Models.User.{user_id}, notification')]
     public function notify($notification)
     {
-            if ($notification['type'] == 'App\Notifications\PopulatePokemon' || $notification['type'] == 'App\Notifications\PopulatePeoples') {
+        if ($notification['type'] == 'App\Notifications\PopulatePokemon' || $notification['type'] == 'App\Notifications\PopulatePeoples') {
                 //     if($notification['notification'] == 'populated_database')
              } 
                 $this->event = $notification['event'];

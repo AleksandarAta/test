@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
 {
+    protected $guarded = [];
     /** @use HasFactory<\Database\Factories\BlogFactory> */
     use HasFactory;
 }
