@@ -38,7 +38,8 @@ class FriendActions extends Component
 
             $notifiedUser = User::findOrFail($friend_id);
             $notifiedUser->notify(new FriendRequest('send' , $user));    
-        $this->showRequest($friend_id);
+        
+            $this->showRequest($friend_id);
     }
 
     #[On('acceptFriend')]
@@ -54,7 +55,8 @@ class FriendActions extends Component
             'accepted' => $this->accepted,
         ]);
     
-        $notifiedUser = $friend_id;
+        $notifiedUser = User::findOrFail($friend_id);
+
         $notifiedUser->notify(new FriendRequest('accepted' , $user));
         $this->showRequest($friend_id);
         

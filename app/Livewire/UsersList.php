@@ -7,6 +7,7 @@ use App\Models\Message;
 use Livewire\Component;
 
 use App\Models\ChatRoom;
+use App\Models\Friend;
 use Livewire\Attributes\On;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
@@ -15,22 +16,29 @@ class UsersList extends Component
 {
     public $here;
     public $user_list;
+   public $users;
 
     public function mount()
     {
         $here = collect($this->here);
         $user_id = Auth::id();
-        $users = User::where('id', '!=', $user_id)->get();
+        $friends = Friend::where('user_id' , $user_id)->get();
+        $this->users = collect();
 
+        foreach($friends as $friend) {
+            $user = User::FindOrFail($friend->friend_id);
+            $this->users->push($user);
 
+        }   
+        // dd($this->users);
         $this->user_list = collect();
-        foreach ($users as $user) {
+        foreach ($this->users as $user) {
 
             $participants = [$user->id, $user_id];
             $room_id_data = ChatRoom::whereJsonContains('participants', $participants)->first();
             if ($room_id_data != null) {
                 $room_id = $room_id_data->id;
-                $unread = Message::where('chat_room_id', $room_id)->where('from', $user->id)->where('read', false)->get()->count();
+                $unread = Message::where('chat_room_id', $room_id)->where('form', $user->id)->where('read', false)->get()->count();
             } else {
                 $unread = 0;
             }
@@ -58,7 +66,7 @@ class UsersList extends Component
 
 
         $this->here = collect($here);
-
+        
 
         $this->user_list = collect($this->user_list);
 
@@ -166,7 +174,7 @@ class UsersList extends Component
     //         $room_id_all = ChatRoom::whereJsonContains('participants', $participants)->first();
     //         if ($room_id_all != null) {
     //             $room_id = $room_id_all->id;
-    //             $unread = Message::where('chat_room_id', $room_id)->where('from', $friend->friend_id)->where('read', false)->get()->count();
+    //             $unread = Message::where('chat_room_id', $room_id)->where('form', $friend->friend_id)->where('read', false)->get()->count();
     //         } else {
     //             $unread = 0;
     //         }
@@ -234,13 +242,15 @@ class UsersList extends Component
         }
         $this->user_list = $new_user_list;
     }
-
+    #[On('startChat')]
+    public function startChat($id , $name){
+        $this->dispatch('startChat', $id , $name)->to(Chat::class);
+    }
 
     public function render()
     {
-
         return view('livewire.users-list', [
-            'users' => $this->user_list,
+            'user' => $this->user_list,
         ]);
     }
 }

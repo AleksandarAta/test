@@ -1,4 +1,5 @@
 <div>
+
     @if ($notification->count())
         <div class="bg-white overflow-hidden shadow-xl rounded-lg m-3 border-2 border-red-300 p-3">
             <span>{{$notification->count()}}</span>

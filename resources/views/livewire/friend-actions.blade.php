@@ -1,5 +1,5 @@
     <div>
-        @if ($user)            
+s        @if ($user)            
         <div class="relative bg-white overflow-hidden shadow-xl rounded-lg m-3 border-2 border-red-300">
             <div class="col-span-5 bg-white overflow-hidden text-center p-3">
                 @if ($status == "friended")

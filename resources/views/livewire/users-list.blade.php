@@ -1,7 +1,8 @@
 <div class="absolute right-0 top-0 z-50 w-[200px] bg-white rounded border border-gray-200 p-5">
-    @if (count($users))
+    {{-- {{ dd($user) }} --}}
+    @if (count($user))
     <div class="bg-white overflow-hidden shadow-xl rounded-lg border-2 border-red-300 p-3">
-        @foreach ($users as $friend)
+        @foreach ($user as $friend)
         <div>
             @if ($friend['status'] == "online")
             <button class="relative inline-block text-left w-full px-2 pr-10 mb-1 border border-red-300 rounded focus:outline-none
@@ -24,7 +25,8 @@
             @else
             <button class="relative inline-block text-left w-full px-2 pr-10 mb-1 border border-red-300 rounded focus:outline-none
                         bg-red-300 hover:bg-red-200 active:bg-red-300 active:ring-2 active:ring-red-200"
-                wire:click="startChat({{ $friend['id'] }}, '{{ $friend['name'] }}')">
+                wire:click="startChat({{ $friend['id'] }}, '{{ $friend['name'] }}')"
+                >
                 {{ $friend['name'] }}
                 <svg class="w-4 h-4 fill-red-400 absolute right-1 top-1" aria-hidden="true" focusable="false"
                     data-prefix="far" data-icon="comment-alt" class="svg-inline--fa fa-comment-alt fa-w-16" role="img"
