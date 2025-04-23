@@ -18,7 +18,7 @@
                 </svg>
                 @if ($friend['unread'] > 0)
                 <span class="text-red-800 absolute right-6 top-0">
-                    {{ $friend['unread'] }} 1
+                    {{ $friend['unread'] }} 
                 </span>
                 @endif
             </button>

@@ -218,7 +218,7 @@ class UsersList extends Component
         }
         $this->user_list = $new_user_list;
     }
-
+    #[On('gotMessage')]
     public function gotMessage($friend_id)
     {
         $this->user_list = collect($this->user_list);

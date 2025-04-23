@@ -16,10 +16,12 @@ class FriendActions extends Component
     public $accepted;
     public $status = "";
 
-    public function mount(User $user) {
-        $this->user = $user;
 
-        $this->showRequest($user->id);
+
+    public function mount() {
+        $this->user = Auth::user();
+
+        $this->showRequest(Auth::id());
     }
 
     #[On('addUser')]
@@ -105,8 +107,6 @@ class FriendActions extends Component
 
     }
     
-
-
     public function render()
     {
         Log::info('status: ' . $this->status);

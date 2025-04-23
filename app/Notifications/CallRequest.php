@@ -9,19 +9,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class MessageRequest extends Notification
+class CallRequest extends Notification
 {
     use Queueable;
-    public $event;
-    public $friend_id;
-
+    public $event, $friend_id, $name;
     /**
      * Create a new notification instance.
      */
-    public function __construct($event, $friend_id)
+    public function __construct($friend_id , $event , $name)
     {
-        $this->event = $event;
         $this->friend_id = $friend_id;
+        $this->event = $event;
+        $this->name = $name;
 
     }
 
@@ -32,19 +31,20 @@ class MessageRequest extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['Broadcast'];
+        return ['broadcast'];
     }
 
     /**
      * Get the mail representation of the notification.
      */
-    public function toBroadcast(object $notifiable): BroadcastMessage
+    public function toBraodcast(object $notifiable): BroadcastMessage
     {
-        Log::info('Event sent from ' . $this->friend_id);
         return (new BroadcastMessage([
-            'event' => $this->event,  
             'friend_id' => $this->friend_id,
+            'event' => $this->event,
+            'name' => $this->name,
         ]));
+            
     }
 
     /**
@@ -54,9 +54,12 @@ class MessageRequest extends Notification
      */
     public function toArray(object $notifiable): array
     {
+        Log::info($this->friend_id . $this->event . $this->name);
+
         return [
-            'event' => $this->event,  
             'friend_id' => $this->friend_id,
+            'event' => $this->event,
+            'name' => $this->name,
         ];
     }
 }

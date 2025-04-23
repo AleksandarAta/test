@@ -2,12 +2,13 @@
 
 namespace App\Livewire;
 
-use App\Models\ChatRoom;
+use App\Models\User;
 use App\Models\Message;
 use Livewire\Component;
+use App\Models\ChatRoom;
 use Livewire\Attributes\On;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class Chat extends Component
 {
@@ -53,10 +54,25 @@ class Chat extends Component
             return $value['id'] == $id;
         });
         log::info($this->open);
-        // $this->dispatch('leave_chat', ['room_id' => $room_id]);
+        // $this->dispatch('leave_chat', room_id:$room_id);
     }
     public function checkIfOpen($friend_id) {
 
+    }
+    // #[On('startVoice')]
+    public function startVoice($id, $name, $room_id)
+    {
+        Log::info('From Chat');
+        $notify_user = User::find($id);
+        $notify_user->notify(new \App\Notifications\CallRequest(Auth::id() ,"voice", Auth::user()->name));
+        $this->dispatch('startVoice', $id, $room_id, $name)->to(ConnectionActions::class);
+    }
+
+    public function startVideo($id, $name, $room_id)
+    {
+        $this->dispatch('startVideo', $id, $name, $room_id)->to(ConnectionActions::class);
+        $notify_user = User::find($id);
+        $notify_user->notify(new \App\Notifications\CallRequest("video", Auth::id(), Auth::user()->name));
     }
     
     public function render()

@@ -10,20 +10,20 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg">
                 <livewire:users-list>
+                <livewire:connection-actions>
             </div>
         </div>
     </div>
 
     @push('scripts')
-    {{-- <script src="{{ asset('adapter-latest.js') }}" defer></script> --}}
-
+    <script src="{{ asset('storage/adapter-latest.js') }}" defer></script>
     <script>
         window.addEventListener('join_chat', event => {
             if (event.detail.has_unread == false) {
                 var objDiv = document.getElementById('chat-' + event.detail.id);
                 objDiv.scrollTop = objDiv.scrollHeight;
             }
-
+            console.log(event);
             Echo.private('chat.' + event.detail.room_id)
                 .listen('ChatUpdated', (e) => {
                 if (e.type == 'message') {
@@ -35,7 +35,6 @@
 
                     var objDiv = document.getElementById('chat-' + event.detail.id);
                     objDiv.scrollTop = objDiv.scrollHeight;
-
                     console.log(e.message + " on channel " + event.detail.room_id);
                 } else if (e.type == 'call') {
                       console.log('Received message:', e.message);
@@ -70,7 +69,6 @@
             var text = document.createTextNode('Me: ' + event.detail.message);
             p.appendChild(text);
             document.getElementById("chat-" + event.detail.id).appendChild(p);
-
             var objDiv = document.getElementById("chat-" + event.detail.id);
             objDiv.scrollTop = objDiv.scrollHeight;
             console.log('Message:  ' + event.detail.message);
@@ -158,7 +156,7 @@
         }
 
         function sendMessage(message) {
-          Livewire.emitTo('chat-body', 'sentLocal', message);
+          Livewire.dispatch('sentLocal', {message: message});
         }
 
         function startCall(constraints, offerer) {

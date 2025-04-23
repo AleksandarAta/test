@@ -36,8 +36,6 @@ class Notifcation extends Component
     #[On('echo-notification:App.Models.User.{user_id}, notification')]
     public function gotNotification($notification) {
         if ($notification['type'] == 'App\Notifications\FriendRequest'){
-
-
             $name = User::select('id', 'name')->where('id' , $notification['friend_id'])->first();
             Log::info('Notificanon sent');
             $this->notification->push([
@@ -46,10 +44,25 @@ class Notifcation extends Component
                 'friend_id' => $notification['friend_id'],
                 'name' => $name->name,
             ]);
+        }
+        elseif($notification['type'] == 'App\Notifications\MessageRequest'){
+            if($notification['event']  == 'Sent you a message'){
+                $friend_id = $notification['friend_id'];
+                $this->dispatch('gotMessage', friend_id:$friend_id)->to(UsersList::class);
+            }
+        } elseif ($notification['type'] == 'App\Notifications\CallRequest') {
+            // dd($notification);
+            if ($notification['event'] == 'voice') {
+                $id = $notification['friend_id'];
+                $friend_name = $notification['name'];
+                $this->dispatch('ringing', $id, $friend_name, 'voice')->to(ConnectionActions::class);
+            } elseif ($notification['event'] == 'video') {
+                $id = $notification['friend_id'];
+                $friend_name = $notification['friend_name'];
+                $this->dispatch('ringing', $id, $friend_name, 'video')->to(ConnectionActions::class);
+            }
+        }
 
-            // dd($this->notification_list);
-
-        } 
         // if($notification['event'] == 'accepted')  {
         //     $this->dispatch('acceptFriend', ['friend_id' => $notification->data['friend_id']]);
         // }elseif($notification['event'] == 'removed') {
@@ -59,7 +72,6 @@ class Notifcation extends Component
     }
     public function render()
     {
-
         return view('livewire.notifcation');
     }
 }
